@@ -8,7 +8,7 @@ const scraperObject = {
         await page.type('input[name="username"]', 'israeligni');
         await page.type('input[name="password"]', '%&R4Z6G,YmsNM,4');
         await page.click('button[type="submit"]');
-        //Modal de notificaciones//
+
         
 
         await page.waitForSelector('input.XTCLo');
@@ -20,12 +20,22 @@ const scraperObject = {
         await page.goto(image);
         await page.waitForSelector('div._aagv');
         let url = await page.$eval('div._aagv > img', el => el.src);
-
+    
         let description = await page.$eval('span._aacl', el => el.innerHTML);
         let hash = await page.$eval('span._aacl > a', el => el.innerHTML);
 
         let indice = description.indexOf("<");
         let newString = description.substring(0, indice);
+
+        await page.goto(url);
+        await page.waitForSelector('img');
+        const element = await page.$('img'); 
+    
+    const screenshot =  await element.screenshot({path: 'newpic.png'});
+
+   
+
+
 
       
 
@@ -33,6 +43,7 @@ const scraperObject = {
 
         return{
             url,
+            screenshot,
             newString,
             hash,
         }

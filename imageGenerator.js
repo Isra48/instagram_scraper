@@ -8,7 +8,7 @@ const imageGenerator = (data) =>{
 
             await page.evaluate(([selector, data]) =>{
                 let dom = document.querySelector(selector);
-                dom.innerHTML =`<p>${data.newString}</p>` }, [selector, data]);
+                dom.innerHTML =`<p>${data.newString}</p> <img src="newpic.png"> </img>` }, [selector, data]);
                 console.log(data.url);
         }
     }
