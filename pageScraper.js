@@ -1,3 +1,12 @@
+const cloudinary = require('cloudinary')
+cloudinary.config({ 
+    cloud_name: 'israignitesting', 
+    api_key: '212623764458432', 
+    api_secret: '87rC5Of0R2vQCcu9k6YhbLEZqOg' 
+  });
+
+
+
 const scraperObject = {
 	url: 'https://www.instagram.com/accounts/login/',
 	async scraper(browser){
@@ -31,21 +40,29 @@ const scraperObject = {
         await page.waitForSelector('img');
         const element = await page.$('img'); 
     
-    const screenshot =  await element.screenshot({path: 'newpic.png'});
 
+    let imgSrc ="";
    
-
-
-
-      
-
+        const screenshot =await element.screenshot({path: 'lastpost.png',
+        encoding: 'buffer'
         
+    
+    });
+    
+    await cloudinary.v2.uploader.upload("./lastpost.png",
+    { public_id: "instagram_ss" }, 
+    function(error, result) {
+        imgSrc = result.url;
+ 
+         });
+    
 
         return{
             url,
-            screenshot,
+            imgSrc,
             newString,
             hash,
+          
         }
 	}
 }
