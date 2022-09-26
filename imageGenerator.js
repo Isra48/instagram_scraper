@@ -8,7 +8,7 @@ cloudinary.config({
 
 
 const imageGenerator = (data) =>{
- console.log(data)
+    let finalData = data;
     const scraperObject = {
         async scraper(browser){
             let page = await browser.newPage();
@@ -69,17 +69,24 @@ const imageGenerator = (data) =>{
         encoding: 'buffer'});
 
         
-            await cloudinary.v2.uploader.upload("./banner1.png,",
+            await cloudinary.v2.uploader.upload("./banner1.png",
             { public_id: "banner1_ss" }, 
-            function(error, result) {console.log(result) }
+            function(error, result) {
+                finalData = {...finalData, banner1: result.url}
+            }
             );
     
-            await cloudinary.v2.uploader.upload("./banner2.png,",
+            await cloudinary.v2.uploader.upload("./banner2.png",
             { public_id: "banner2_ss" }, 
-            function(error, result) {console.log(result)});
+            function(error, result) {
+                finalData = {...finalData, banner2: result.url}
+            });
+
+            console.log(finalData)
+
+            return finalData;
 
         },10000)
-       
 
 
         }

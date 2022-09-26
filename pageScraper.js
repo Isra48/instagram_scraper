@@ -20,10 +20,10 @@ const scraperObject = {
 
         
 
-        await page.waitForSelector('input.XTCLo');
-        await page.type('input.XTCLo', 'samsclubmx');
-        await page.waitForSelector('a.-qQT3');
-        await page.click('a.-qQT3');
+        await page.waitForSelector('._aauy');
+        await page.type('._aauy', 'samsclubmx');
+        await page.waitForSelector('._abm4');
+        await page.click('div._abm4>a');
         await page.waitForSelector('article._aayp');
         let image = await page.$eval('div._aabd > a', el => el.href);
         await page.goto(image);
@@ -41,13 +41,11 @@ const scraperObject = {
         const element = await page.$('img'); 
     
 
-    let imgSrc ="";
+        let imgSrc ="";
    
         const screenshot =await element.screenshot({path: 'lastpost.png',
         encoding: 'buffer'
-        
-    
-    });
+        });
     
     await cloudinary.v2.uploader.upload("./lastpost.png",
     { public_id: "instagram_ss" }, 
@@ -62,7 +60,6 @@ const scraperObject = {
             imgSrc,
             newString,
             hash,
-          
         }
 	}
 }
