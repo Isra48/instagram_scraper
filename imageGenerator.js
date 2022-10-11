@@ -1,4 +1,5 @@
-const cloudinary = require('cloudinary')
+const cloudinary = require('cloudinary');
+const Trigger = require('./ApiPost');
 cloudinary.config({ 
     cloud_name: 'israignitesting', 
     api_key: '212623764458432', 
@@ -72,7 +73,7 @@ const imageGenerator = (data) =>{
             await cloudinary.v2.uploader.upload("./banner1.png",
             { public_id: "banner1_ss" }, 
             function(error, result) {
-                finalData = {...finalData, banner1: result.url}
+                finalData = {...finalData, url_image: result.url}
             }
             );
     
@@ -81,13 +82,16 @@ const imageGenerator = (data) =>{
             function(error, result) {
                 finalData = {...finalData, banner2: result.url}
             });
+            finalData= {...finalData, date: Date(), description: "Last_Post", type_banner: "short" }    
 
             console.log(finalData)
+            Trigger(finalData)
 
             return finalData;
 
         },10000)
 
+       
 
         }
     }
@@ -97,6 +101,10 @@ const imageGenerator = (data) =>{
 
 
     return scraperObject
+
+   
+    
 }
 
-module.exports = imageGenerator
+
+module.exports = imageGenerator;

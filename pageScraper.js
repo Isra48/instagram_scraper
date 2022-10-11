@@ -15,7 +15,7 @@ const scraperObject = {
 		await page.goto(this.url);
         await page.waitForSelector('input[name="username"]')
         await page.type('input[name="username"]', 'israeligni');
-        await page.type('input[name="password"]', '%&R4Z6G,YmsNM,4');
+        await page.type('input[name="password"]', 'Israigni1997');
         await page.click('button[type="submit"]');
 
         
@@ -25,11 +25,12 @@ const scraperObject = {
         await page.waitForSelector('._abm4');
         await page.click('div._abm4>a');
         await page.waitForSelector('article._aayp');
-        let image = await page.$eval('div._aabd > a', el => el.href);
-        await page.goto(image);
+        await page.waitForSelector('div._ac7v');
+        let url_link = await page.$eval('div._aabd > a', el => el.href);
+        await page.goto(url_link);
         await page.waitForSelector('div._aagv');
         let url = await page.$eval('div._aagv > img', el => el.src);
-    
+        await page.waitForSelector('span._aacl');
         let description = await page.$eval('span._aacl', el => el.innerHTML);
         let hash = await page.$eval('span._aacl > a', el => el.innerHTML);
 
@@ -56,6 +57,7 @@ const scraperObject = {
     
 
         return{
+            url_link,
             url,
             imgSrc,
             newString,
@@ -63,5 +65,6 @@ const scraperObject = {
         }
 	}
 }
+
 
 module.exports = scraperObject;
