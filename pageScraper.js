@@ -13,15 +13,29 @@ const scraperObject = {
 		let page = await browser.newPage();
 		console.log(`Navigating to ${this.url}...`);
 		await page.goto(this.url);
-        await page.waitForSelector('input[name="username"]')
+        // Aqui ingresa credenciales
+        await page.waitForSelector('input[name="username"]');
         await page.type('input[name="username"]', 'israeligni');
         await page.type('input[name="password"]', 'Israigni1997');
         await page.click('button[type="submit"]');
-
+        // Aqui espera al banner de Activar notificaciones
+        
+        
+        await page.waitForSelector('.x7r02ix');
+        await page.click('button._a9_0');
+     
         
 
-        await page.waitForSelector('._aauy');
-        await page.type('._aauy', 'samsclubmx');
+      
+
+
+
+        
+        //aqui busca el navbar
+        await page.waitForSelector('.x1xgvd2v');
+        await page.click('.x1i10hfl');
+        await page.waitForSelector('_ab8w')
+        await page.type('._aawf', 'samsclubmx');
         await page.waitForSelector('._abm4');
         await page.click('div._abm4>a');
         await page.waitForSelector('article._aayp');
